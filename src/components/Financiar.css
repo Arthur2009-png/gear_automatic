@@ -20,7 +20,7 @@
     linear-gradient(
       135deg,
       rgba(80, 80, 80, 0.92),
-      rgba(58, 58, 58, 0.92)
+      rgba(250, 125, 125, 0.92)
     ),
     url("../assets/sedans.jpg") center/cover;
   border: 1px solid rgba(5, 5, 5, 0.14);
