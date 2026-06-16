@@ -1,0 +1,154 @@
+.gear-footer {
+  background-color: #121417; /* Grafite bem escuro premium */
+  color: #ffffff;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  position: relative;
+  margin-top: 60px; /* Dá um espaço do conteúdo superior */
+  width: 100%;
+}
+
+/* Barra vermelha que herda o estilo do marcador de Categorias da sua imagem */
+.footer-accent-bar {
+  height: 4px;
+  background-color: #e31c25; /* Vermelho vivo idêntico ao detalhe do título */
+  width: 100%;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.footer-brand {
+  flex: 1;
+  min-width: 280px;
+}
+
+.footer-logo {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+  color: #ffffff;
+}
+
+.logo-highlight {
+  color: #c5c5c5;
+  font-weight: 300;
+}
+
+.footer-description {
+  color: #a0a5b0;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  max-width: 360px;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 15px;
+}
+
+.social-link {
+  color: #a0a5b0;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.social-link:hover {
+  color: #e31c25; /* Fica vermelho ao passar o mouse */
+}
+
+.footer-links-section {
+  display: flex;
+  gap: 50px;
+  flex-wrap: wrap;
+  flex: 2;
+  justify-content: flex-end;
+}
+
+.footer-col {
+  min-width: 140px;
+}
+
+.footer-col h3 {
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 18px;
+  color: #ffffff;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-col ul li {
+  margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+  color: #a0a5b0;
+  text-decoration: none;
+  font-size: 14px;
+  transition: transform 0.2s ease, color 0.2s ease;
+  display: inline-block;
+}
+
+.footer-col ul li a:hover {
+  color: #ffffff;
+  transform: translateX(4px); /* Sutil efeito de empurrão para a direita */
+}
+
+/* Faixa de copyright inferior */
+.footer-bottom {
+  background-color: #0b0c0e; /* Um tom ainda mais escuro para o fundo */
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid #1f232b;
+  font-size: 13px;
+  color: #717784;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.dev-credit {
+  font-style: italic;
+  color: #4a4f5a;
+}
+
+/* Responsividade para telas menores (Celular) */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+  }
+  
+  .footer-links-section {
+    justify-content: flex-start;
+    gap: 30px;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+}
