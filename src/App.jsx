@@ -15,19 +15,38 @@ function App() {
   const [selectedCars, setSelectedCars] = useState(null);
   const [carroParaFinanciarId, setCarroParaFinanciarId] = useState(null);
 
+  // ✅ NOVA FUNÇÃO: Intercepta a mudança de aba para aplicar a transição visual
+  const mudarAbaComTransicao = (novaAba) => {
+    // Se o navegador não suportar (ex: Safari antigo), muda o estado normalmente
+    if (!document.startViewTransition) {
+      setActiveTab(novaAba);
+      return;
+    }
+
+    // Executa a animação nativa de transição de tela
+    document.startViewTransition(() => {
+      setActiveTab(novaAba);
+    });
+  };
+
   // Inicialização estável do AOS
   useEffect(() => {
     AOS.init({
-      duration: 1000, // ✅ Reajustado para 1 segundo (igual à foto do projeto)
+      duration: 1000, // Reajustado para 1 segundo
       once: true,
       mirror: false,
       easing: "ease-in-out",
     });
   }, []); 
 
-  // ✅ NOVO: Atualiza as posições do AOS toda vez que o usuário alterna entre abas
+  // ✅ ATUALIZADO: Atualiza as posições do AOS com um micro-atraso
+  // Isso evita conflitos visuais enquanto a View Transition está executando
   useEffect(() => {
-    AOS.refresh();
+    const timer = setTimeout(() => {
+      AOS.refresh();
+    }, 100); // 100ms é o suficiente para a transição inicializar bem
+
+    return () => clearTimeout(timer);
   }, [activeTab]);
 
   function renderContent() {
@@ -55,11 +74,12 @@ function App() {
   return (
     <div className="vortex-app">
       <main className="vortex-main">
+        {/* ✅ Passando a nova função para o Header */}
         <Header
           search={search}
           setSearch={setSearch}
           activeTab={activeTab}
-          setActiveTab={setActiveTab}
+          setActiveTab={mudarAbaComTransicao} 
         />
 
         <h2 className="section-title">
@@ -75,10 +95,11 @@ function App() {
         <Footer />
       </main>
 
+      {/* ✅ Passando a nova função para o Modal */}
       <CarModal
         Cars={selectedCars}
         onClose={() => setSelectedCars(null)}
-        setActiveTab={setActiveTab}
+        setActiveTab={mudarAbaComTransicao}
         setCarroParaFinanciarId={setCarroParaFinanciarId} 
       />
     </div>

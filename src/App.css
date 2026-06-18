@@ -12,6 +12,8 @@
 
 .vortex-content {
   padding: 10px 40px 40px;
+  /* 1. Vincula este container específico à API de transição */
+  view-transition-name: conteudo-paginas;
 }
 
 .section-title {
@@ -34,5 +36,41 @@
     margin-top: 24px;
     font-size: 24px;
   }
+}
 
+/* ==========================================================================
+   CONFIGURAÇÃO DA ANIMAÇÃO DE TRANSIÇÃO (VIEW TRANSITION)
+   ========================================================================== */
+
+/* 2. Remove a animação padrão do 'root' (evita que o cabeçalho/rodapé pisquem) */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+
+/* 3. Cria o efeito de "Slide-in" (vindo da direita para a esquerda) */
+@keyframes slideFromRight {
+  from {
+    transform: translateX(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* 4. Cria o efeito de "Fade-out" (sumindo suavemente para a página nova entrar) */
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* 5. Aplica as animações criadas exclusivamente no conteúdo das abas */
+::view-transition-old(conteudo-paginas) {
+  animation: 0.15s ease-in-out both fadeOut;
+}
+
+::view-transition-new(conteudo-paginas) {
+  animation: 0.35s cubic-bezier(0.4, 0, 0.2, 1) both slideFromRight;
 }
