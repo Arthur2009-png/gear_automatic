@@ -1,20 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CarsData } from "../data/cars";
 import "./Financiar.css";
 
-export function Financiar() {
+export function Financiar({ idCarroInicial }) {
   const [idCarroSelecionado, setIdCarroSelecionado] = useState(
-    CarsData[0].id
+    idCarroInicial || CarsData[0]?.id || 1
   );
 
   const [valorEntrada, setValorEntrada] = useState(30000);
-
   const [quantidadeParcelas, setQuantidadeParcelas] = useState(48);
 
-  const carroSelecionado =
-    CarsData.find(
-      (carro) => carro.id === Number(idCarroSelecionado)
-    ) || CarsData[0];
+  // ✅ CORREÇÃO: Força a página a rolar para o topo sempre que a tela iniciar ou mudar o carro clicado
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Transição suave de rolagem
+    });
+  }, [idCarroInicial]);
+
+  // Sincroniza o ID selecionado caso o componente pai mande um novo carro via props
+  useEffect(() => {
+    if (idCarroInicial) {
+      setIdCarroSelecionado(idCarroInicial);
+    }
+  }, [idCarroInicial]);
+
+  // Busca o objeto do carro selecionado na lista
+  const carroSelecionado = CarsData.find(
+    (carro) => carro.id === Number(idCarroSelecionado)
+  ) || CarsData[0];
 
   const precoCarro = carroSelecionado.fipe;
 
@@ -128,32 +142,32 @@ export function Financiar() {
 
           <h3>{carroSelecionado.title}</h3>
 
-         <div className="finance-values">
-  <p>
-    <strong>FIPE estimada</strong>
-    {formatarMoeda(precoCarro)}
-  </p>
+          <div className="finance-values">
+            <p>
+              <strong>FIPE estimada</strong>
+              {formatarMoeda(precoCarro)}
+            </p>
 
-  <p>
-    <strong>Valor da entrada</strong>
-    {formatarMoeda(entradaSegura)}
-  </p>
+            <p>
+              <strong>Valor da entrada</strong>
+              {formatarMoeda(entradaSegura)}
+            </p>
 
-  <p>
-    <strong>Total financiado</strong>
-    {formatarMoeda(valorFinanciado)}
-  </p>
+            <p>
+              <strong>Total financiado</strong>
+              {formatarMoeda(valorFinanciado)}
+            </p>
 
-  <p>
-    <strong>Parcela aproximada</strong>
-    {formatarMoeda(valorParcela)}
-  </p>
+            <p>
+              <strong>Parcela aproximada</strong>
+              {formatarMoeda(valorParcela)}
+            </p>
 
-  <p>
-    <strong>Total pago</strong>
-    {formatarMoeda(valorTotalPago)}
-  </p>
-</div>
+            <p>
+              <strong>Total pago</strong>
+              {formatarMoeda(valorTotalPago)}
+            </p>
+          </div>
 
           <small>
             Simulação ilustrativa com taxa mensal de

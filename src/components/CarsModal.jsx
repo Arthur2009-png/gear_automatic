@@ -1,12 +1,17 @@
 import "./CarsModal.css";
 import { X } from "lucide-react";
 
-export function CarModal({ Cars, onClose, setActiveTab }) {
+// ✅ CORREÇÃO 1: Recebendo a prop 'setCarroParaFinanciarId' vinda do App.jsx
+export function CarModal({ Cars, onClose, setActiveTab, setCarroParaFinanciarId }) {
   if (!Cars) return null;
 
   const handleFinanceClick = () => {
-    setActiveTab("financiar");
-    onClose();
+    // ✅ CORREÇÃO 2: Verificando se o objeto Cars existe e salvando o ID correto no App.jsx
+    if (Cars && Cars.id) {
+      setCarroParaFinanciarId(Cars.id); 
+    }
+    setActiveTab("financiar"); // Troca para a aba de financiamento
+    onClose(); // Fecha o modal
   };
 
   return (

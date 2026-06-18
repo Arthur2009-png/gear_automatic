@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import { CarsData } from "../data/cars";
 import { CarsCard } from "./CarsCard";
-import {CategoryCarrocel } from "./CategoryCarrocel";
+import { CategoryCarrocel } from "./CategoryCarrocel";
+import AOS from "aos"; 
 import "./Categoria.css";
 
 export function Categoria({
@@ -8,6 +10,11 @@ export function Categoria({
   search,
   setSelectedCars
 }) {
+  
+  useEffect(() => {
+    AOS.refresh();
+  }, [activeTab, search]); 
+
   const filteredCars = CarsData
     .filter((Cars) => activeTab === "category" || Cars.category === activeTab)
     .filter((Cars) =>
@@ -16,13 +23,22 @@ export function Categoria({
 
   return (
     <section className="category-page">
-      <CategoryCarrocel cars={CarsData} />
+      {/* Animando o carrossel do topo */}
+      <div data-aos="fade-down" data-aos-duration="800">
+        <CategoryCarrocel cars={CarsData} />
+      </div>
 
-      <div className="vortex-grid">
+      {/* ✅ MUDANÇA AQUI: Adicionamos o data-aos direto no container do Grid */}
+      <div 
+        className="vortex-grid"
+        data-aos="fade-up"
+        data-aos-duration="800"
+      >
         {filteredCars.map((c) => (
           <div
             key={c.id}
             className="card-button"
+            // ✅ MUDANÇA AQUI: Removemos os atributos individuais e o data-aos-delay
           >
             <CarsCard
               title={c.title}
