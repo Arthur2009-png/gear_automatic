@@ -17,7 +17,7 @@ export const CarsData = [
   { id: 5, title: "BMW M2 xDrive", category: "Coup", banner: coup, fipe: 535000 },
   { id: 6, title: "Toyota Corolla XEI", category: "Sedans", banner: sedan, fipe: 151000 },
   { id: 7, title: "Fiat Touro", category: "Picapes", banner: picape, fipe: 315000 },
-  { id: 8, title: "Fiat Mobi", category: "Hatches", banner: hatches, fipe: 98000 },
+  { id: 8, title: "Toyota Corolla GR", category: "Hatches", banner: hatches, fipe: 325000 },
   { id: 9, title: "Opala ss ", category: "Classicos", banner: classicos, fipe: 185000 },
 
 
